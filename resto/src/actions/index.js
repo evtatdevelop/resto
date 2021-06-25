@@ -11,7 +11,23 @@ const menuRequested = () => {
   };
 };
 
+const delFromCart = (id) => {
+  return {
+    type: 'DEL_FROM_CART',
+    payload: id
+  }
+}
+
+const addedToCart = (id) => {
+  return {
+    type: 'ADD_TO_CART',
+    payload: id
+  }
+}
+
 export {
   menuLoaded,
-  menuRequested
+  menuRequested,
+  addedToCart,
+  delFromCart
 }

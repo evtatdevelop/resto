@@ -18,7 +18,7 @@ const App = () => {
                     exact
                 />
                 <Route
-                    path='/cart'
+                    path='/cart/'
                     component = {CartPage}
                     exact
                 />
