@@ -66,9 +66,34 @@ const reducer = (state = initialState, action) => {
       };
 
     case 'DEL_FROM_CART':
+      const idDel = action.payload;
+      let totalDel = state.total;
+      const {items} = state;
+      const itemIndexDel = items.findIndex(item => item.id === idDel);
+      const itemDel = items[itemIndexDel];
+
+      if ( itemDel.num > 1 ) {
+        const newItem = {
+          ...itemDel,
+          num: itemDel.num - 1,
+          total: itemDel.total - itemDel.price
+        }
+        totalDel -= itemDel.price;
+        
+        return {
+          ...state,
+          items: [
+            ...items.slice(0, itemIndexDel),
+            newItem,
+            ...items.slice(itemIndexDel + 1)
+          ],
+          total: totalDel
+        }
+      }
       return {
         ...state,
-        items: state.items.filter(item => item.id !== action.payload) 
+        items: items.filter(item => item.id !== idDel) ,
+        total: state.total - itemDel.price
       };
 
     default: 
